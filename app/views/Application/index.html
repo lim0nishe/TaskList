@@ -2,3 +2,45 @@
 #{set title:'Task List' /}
 
 <h1> Pls add some shit here </h1>
+
+#{if tasks}
+	<table border="1">
+		<thead>
+			<tr><th>Tasks:</th><tr>
+		</thead>
+		<tbody>
+			#{list items: tasks, as:'task'}
+				<tr><td>${task.name}</td></tr>
+				<tr><td>${task.description}</td></tr>
+				<tr><td>Start: ${task.startDate}</td></tr>
+				<tr><td>Finish: ${task.endDate}</td><tr>
+			#{/list}
+		</tbody>
+	</table>
+#{/if}
+
+<h1> Add New Task: <h1>
+#{form @Application.addTask()}
+	
+	#{ifErrors}
+        <p class="error">
+            Name  and Description are required!
+        </p>
+    #{/ifErrors}
+	
+	<p>
+        <label for="name">Name: </label>
+        <input type="text" name="name" id="name" />
+    </p>
+	<p>
+		<label for="description">Description: </label>
+        <input type="text" name="description" id="description" />
+	</p>
+	<p>
+		<input type="date" name="startDate" value="2016-07-20" min="2016-07-20">
+		<input type="date" name="endDate" value="2016-07-21" min="2016-07-21">
+	</p>
+    <p>
+        <input type="submit" value="Добавить" />
+    </p>
+#{/form}
